@@ -43,16 +43,16 @@ if (isset($_POST['btn-login'])) {
 
         $password = hash('sha256', $pass); // password hashing
 
-        $sql = "SELECT id, fname, password, status FROM users WHERE email = '$email'";
+        $sql = "SELECT user_id, fname, password, status FROM users WHERE email = '$email'";
         $result = mysqli_query($connect, $sql);
         $row = mysqli_fetch_assoc($result);
         $count = mysqli_num_rows($result);
         if ($count == 1 && $row['password'] == $password) {
             if ($row['status'] == 'adm') {
-                $_SESSION['adm'] = $row['id'];
+                $_SESSION['adm'] = $row['user_id'];
                 header("Location: dashboard.php");
             } else {
-                $_SESSION['user'] = $row['id'];
+                $_SESSION['user'] = $row['user_id'];
                 header("Location: home.php");
             }
         } else {

@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 require_once '../components/db_connect.php';
 
 if (isset($_SESSION['user']) != "") {
@@ -11,18 +10,16 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     header("Location: ../index.php");
     exit;
 }
-
-$sql = "SELECT * FROM cars";
+$sql = "SELECT * FROM cars JOIN rental ON rental.fk_car_id = cars.car_id JOIN users ON rental.fk_user_id = users.user_id";
 $result = mysqli_query($connect, $sql);
 $tbody = ''; //this variable will hold the body for the table
 if (mysqli_num_rows($result)  > 0) {
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $tbody .= "<tr>
-            <td><img class='img-thumbnail' src='../pictures/" . $row['picture'] . "'</td>
-            <td>" . $row['brand'] . "</td>
-            <td>" . $row['model'] . "</td>
-            <td><a href='update.php?id=" . $row['car_id'] . "'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
-            <a href='delete.php?id=" . $row['car_id'] . "'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
+            <td>" . $row['fname'] . " " . $row['lname'] . "</td>
+            <td>" . $row['brand'] . " " . $row['model'] . "</td>
+            <td>" . $row['rental_date'] . "</td>
+            <td><a href='delete.php?id=" . $row['rental_id'] . "'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
             </tr>";
     };
 } else {
@@ -38,7 +35,7 @@ mysqli_close($connect);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP CRUD</title>
+    <title>Rentals</title>
     <?php require_once '../components/boot.php' ?>
     <style type="text/css">
         .manageProduct {
@@ -64,21 +61,20 @@ mysqli_close($connect);
 <body>
     <div class="manageProduct w-75 mt-3">
         <div class='mb-3'>
-            <a href="create.php"><button class='btn btn-primary' type="button">Add Car</button></a>
             <a href="../dashboard.php"><button class='btn btn-success' type="button">Dashboard</button></a>
         </div>
-        <p class='h2'>Cars</p>
+        <p class='h2'>Rentals</p>
         <table class='table table-striped'>
             <thead class='table-success'>
                 <tr>
-                    <th>Picture</th>
-                    <th>Brand</th>
-                    <th>Model</th>
+                    <th>User</th>
+                    <th>Car</th>
+                    <th>Rental Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?= $tbody; ?>
+                <?php echo $tbody; ?>
             </tbody>
         </table>
     </div>

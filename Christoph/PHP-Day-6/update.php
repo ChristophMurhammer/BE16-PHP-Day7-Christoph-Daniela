@@ -21,7 +21,7 @@ if (isset($_SESSION["adm"])) {
 //fetch and populate form
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM users WHERE id = {$id}";
+    $sql = "SELECT * FROM users WHERE user_id = {$id}";
     $result = mysqli_query($connect, $sql);
     if (mysqli_num_rows($result) == 1) {
         $data = mysqli_fetch_assoc($result);
@@ -113,7 +113,7 @@ mysqli_close($connect);
                     <td><input class="form-control" type="file" name="picture" /></td>
                 </tr>
                 <tr>
-                    <input type="hidden" name="id" value="<?php echo $data['id'] ?>" />
+                    <input type="hidden" name="id" value="<?php echo $data['user_id'] ?>" />
                     <input type="hidden" name="picture" value="<?php echo $picture ?>" />
                     <td><button name="submit" class="btn btn-success" type="submit">Save Changes</button></td>
                     <td><a href="<?php echo $backBtn ?>"><button class="btn btn-warning" type="button">Back</button></a></td>

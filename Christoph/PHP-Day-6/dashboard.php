@@ -25,8 +25,8 @@ if ($result->num_rows > 0) {
             <td><img class='img-thumbnail rounded-circle' src='pictures/" . $row['picture'] . "' alt=" . $row['fname'] . "></td>
             <td>" . $row['fname'] . " " . $row['lname'] . "</td>
             <td>" . $row['email'] . "</td>
-            <td><a href='update.php?id=" . $row['id'] . "'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
-            <a href='delete.php?id=" . $row['id'] . "'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
+            <td><a href='update.php?id=" . $row['user_id'] . "'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
+            <a href='delete.php?id=" . $row['user_id'] . "'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
          </tr>";
     }
 } else {
@@ -51,7 +51,7 @@ mysqli_close($connect);
         }
 
         td {
-            text-align: left;
+            text-align: center;
             vertical-align: middle;
         }
 
@@ -73,6 +73,7 @@ mysqli_close($connect);
                 <img class="userImage" src="pictures/admavatar.png" alt="Adm avatar">
                 <p class="">Administrator</p>
                 <a class="btn btn-success" href="products/index.php">Cars</a>
+                <a class="btn btn-success" href="rentals/index.php">Rentals</a>
                 <a class="btn btn-danger" href="logout.php?logout">Sign Out</a>
             </div>
             <div class="col-8 mt-2">

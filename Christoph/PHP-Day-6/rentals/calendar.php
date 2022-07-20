@@ -1,6 +1,6 @@
-// source: https://codeshack.io/event-calendar-php/
-
-<?php class Calendar
+<?php 
+#source: https://codeshack.io/event-calendar-php/
+class Calendar
 {
 
     private $active_year, $active_month, $active_day;

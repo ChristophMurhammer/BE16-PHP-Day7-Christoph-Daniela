@@ -15,13 +15,14 @@ require_once '../components/db_connect.php';
 
 if ($_GET['id']) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM cars WHERE car_id = {$id}";
+    $sql = "SELECT * FROM cars JOIN rental ON rental.fk_car_id = cars.car_id JOIN users ON rental.fk_user_id = users.user_id WHERE rental.rental_id = {$id}";
     $result = mysqli_query($connect, $sql);
     $data = mysqli_fetch_assoc($result);
     if (mysqli_num_rows($result) == 1) {
         $brand = $data['brand'];
         $model = $data['model'];
-        $picture = $data['picture'];
+        $user = $data['fname'] . " " . $data['lname'];
+        $date = $data['rental_date'];
     } else {
         header("location: error.php");
     }
@@ -55,18 +56,19 @@ if ($_GET['id']) {
 
 <body>
     <fieldset>
-        <legend class='h2 mb-3'>Delete request <img class='img-thumbnail rounded-circle' src='../pictures/<?php echo $picture ?>' alt="<?php echo $brand . " " . $model ?>"></legend>
+        <legend class='h2 mb-3'>Delete request</legend>
         <h5>You have selected the data below:</h5>
         <table class="table w-75 mt-3">
             <tr>
                 <td><?php echo $brand . " " . $model ?></td>
+                <td><?php echo $user ?></td>
+                <td><?php echo $date ?></td>
             </tr>
         </table>
 
-        <h3 class="mb-4">Do you really want to delete this product?</h3>
+        <h3 class="mb-4">Do you really want to delete this reservation?</h3>
         <form action="actions/a_delete.php" method="post">
             <input type="hidden" name="id" value="<?php echo $id ?>" />
-            <input type="hidden" name="picture" value="<?php echo $picture ?>" />
             <button class="btn btn-danger" type="submit">Yes, delete it!</button>
             <a href="index.php"><button class="btn btn-warning" type="button">No, go back!</button></a>
         </form>

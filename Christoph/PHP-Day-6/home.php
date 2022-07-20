@@ -14,7 +14,7 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
 }
 
 // select logged-in users details - procedural style
-$res = mysqli_query($connect, "SELECT * FROM users WHERE id=" . $_SESSION['user']);
+$res = mysqli_query($connect, "SELECT * FROM users WHERE user_id=" . $_SESSION['user']);
 $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
 
 $sql = "SELECT * from cars";
@@ -28,7 +28,7 @@ while($row1 = mysqli_fetch_assoc($result)){
                 <img src='pictures/" . $row1['picture'] . "' class='card-img-top' alt='Car' width='200' height='300'>
                 <div class='card-body'>
                 <h5 class='card-title'>" . $row1['brand'] . " " . $row1['model'] . "</h5>       
-                <a href='rentals/create.php?id=" . $row1['id'] . "'><button class='btn btn-primary' type='button'>Rent</button></a>
+                <a href='rentals/create.php?id=" . $row1['car_id'] . "'><button class='btn btn-primary' type='button'>Rent</button></a>
                 </div></div></div>";
 }
 }
@@ -52,7 +52,7 @@ mysqli_close($connect)
     <div class="navbar-header">
       <a class="navbar-brand">Welcome, <?php echo $row['fname'] . " " . $row['lname'] ?> </a>
     </div>
-        <a href="update.php?id= <?php echo $row['id']?>"><button class='btn btn-success navbar-btn' type='button'>Update your profile</button></a>
+        <a href="update.php?id= <?php echo $row['user_id']?>"><button class='btn btn-success navbar-btn' type='button'>Update your profile</button></a>
         <a href="logout.php?logout"><button class='btn btn-danger navbar-btn' type='button'>Logout</button></a>
   </div>
 </nav>

@@ -20,7 +20,7 @@ if (isset($_SESSION["adm"])) {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM cars WHERE id = {$id}";
+    $sql = "SELECT * FROM cars WHERE car_id = {$id}";
     $result = mysqli_query($connect, $sql);
     if (mysqli_num_rows($result) == 1) {
         $data = mysqli_fetch_assoc($result);
