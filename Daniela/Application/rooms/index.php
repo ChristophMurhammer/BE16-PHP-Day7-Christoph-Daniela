@@ -4,11 +4,11 @@
     require_once '../components/db_connect.php';
 
     if(isset($_SESSION["user"])){
-        header("Location: home.php");
+        header("Location: ../home.php");
         exit;
     }
     if(!isset($_SESSION["admin"]) && !isset($_SESSION["user"])){
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit;
     } 
 
@@ -92,7 +92,7 @@ if(mysqli_num_rows($result2) > 0 ) {
               <h5 class="card-title text-warning font-italic">Admin</h5>
               <p class="card-text">Hello, <?= $row["f_name"] . " " . $row["l_name"] ?></p>
               <a href="../dashboard.php"class="btn btn-outline-dark">Dashboard</a>
-              <a href="logout.php?logout"class="btn btn-outline-dark">Logout</a>
+              <a href="../logout.php?logout"class="btn btn-outline-dark">Logout</a>
        
    
              </div>
@@ -100,20 +100,17 @@ if(mysqli_num_rows($result2) > 0 ) {
 
     </div>
 
-    <div class="container d-flex justify-content-center">
+    <div class="container ">
 
-<!-- 
-    <table class="table table-dark table-borderd">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-     -->
+
+    <div class="container d-flex justify-content-around ">
+
+
+    <h6 class="">ROOMS DASHBOARD | </h6>
+
+    <a href="create.php"><h6 class="">| ADD NEW ROOM </h6></a>
+
+    </div>
 
 
 

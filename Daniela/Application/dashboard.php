@@ -104,20 +104,7 @@ require "components/db_connect.php";
 
     </div>
 
-    <div class="container d-flex justify-content-center">
-
-<!-- 
-    <table class="table table-dark table-borderd">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-     -->
+    <div class="container">
 
 
 
