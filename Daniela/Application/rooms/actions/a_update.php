@@ -44,7 +44,7 @@ if ($_POST) {
     }
     mysqli_close($connect);
 } else {
-    header("location: ../error.php");
+    header("location ../error.php");
 }
 ?>
 
