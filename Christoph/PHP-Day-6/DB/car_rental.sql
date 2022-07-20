@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2022 at 12:10 PM
+-- Generation Time: Jul 20, 2022 at 03:28 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,7 +30,7 @@ USE `car_rental`;
 --
 
 CREATE TABLE `cars` (
-  `id` int(11) NOT NULL,
+  `car_id` int(11) NOT NULL,
   `picture` varchar(255) DEFAULT NULL,
   `brand` varchar(255) NOT NULL,
   `model` varchar(255) NOT NULL
@@ -40,9 +40,14 @@ CREATE TABLE `cars` (
 -- Dumping data for table `cars`
 --
 
-INSERT INTO `cars` (`id`, `picture`, `brand`, `model`) VALUES
+INSERT INTO `cars` (`car_id`, `picture`, `brand`, `model`) VALUES
 (1, '62d68065caa9f.jpg', 'VW', 'Golf VI'),
-(3, '62d681aa493fb.jpg', 'Ford', 'Focus RS');
+(3, '62d681aa493fb.jpg', 'Ford', 'Focus RS'),
+(4, '62d7f19cc68a6.jpg', 'Ford', 'F-150'),
+(5, '62d7f1c8de1cf.jpg', 'Chevrolet', 'Silverado'),
+(6, '62d7f1eb19686.jpg', 'Toyota', 'RAV4'),
+(7, '62d7f1ff4cc1a.jpg', 'Honda', 'CR-V'),
+(8, '62d7f21186e39.jpg', 'Nissan', 'Rogue');
 
 -- --------------------------------------------------------
 
@@ -51,7 +56,7 @@ INSERT INTO `cars` (`id`, `picture`, `brand`, `model`) VALUES
 --
 
 CREATE TABLE `rental` (
-  `id` int(11) NOT NULL,
+  `rental_id` int(11) NOT NULL,
   `fk_user_id` int(11) NOT NULL,
   `fk_car_id` int(11) NOT NULL,
   `rental_date` date NOT NULL
@@ -64,7 +69,7 @@ CREATE TABLE `rental` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `fname` varchar(255) NOT NULL,
   `lname` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -77,8 +82,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `picture`, `status`) VALUES
-(1, 'Admin', 'Admin', '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 'admin@admin.admin', 'avatar.png', 'adm');
+INSERT INTO `users` (`user_id`, `fname`, `lname`, `password`, `email`, `picture`, `status`) VALUES
+(1, 'Admin', 'Admin', '25f43b1486ad95a1398e3eeb3d83bc4010015fcc9bedb35b432e00298d5021f7', 'admin@admin.admin', 'avatar.png', 'adm'),
+(3, 'User', 'user', 'e172c5654dbc12d78ce1850a4f7956ba6e5a3d2ac40f0925fc6d691ebb54f6bf', 'user@user.user', 'avatar.png', 'user'),
+(4, 'Test', 'User', 'ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae', 'test@test.at', 'avatar.png', 'user'),
+(5, 'John', 'Doe', 'c2713b62c903791bdefc5a6a99df04d4330de491bbc7a0ca6a5007337e4a6028', 'j.doe@gmx.at', 'avatar.png', 'user');
 
 --
 -- Indexes for dumped tables
@@ -88,13 +96,13 @@ INSERT INTO `users` (`id`, `fname`, `lname`, `password`, `email`, `picture`, `st
 -- Indexes for table `cars`
 --
 ALTER TABLE `cars`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`car_id`);
 
 --
 -- Indexes for table `rental`
 --
 ALTER TABLE `rental`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`rental_id`),
   ADD KEY `fk_car_id` (`fk_car_id`),
   ADD KEY `fk_user_id` (`fk_user_id`);
 
@@ -102,7 +110,7 @@ ALTER TABLE `rental`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -112,19 +120,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `rental`
 --
 ALTER TABLE `rental`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rental_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -134,8 +142,8 @@ ALTER TABLE `users`
 -- Constraints for table `rental`
 --
 ALTER TABLE `rental`
-  ADD CONSTRAINT `fk_car_id` FOREIGN KEY (`fk_car_id`) REFERENCES `cars` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_car_id` FOREIGN KEY (`fk_car_id`) REFERENCES `cars` (`car_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
