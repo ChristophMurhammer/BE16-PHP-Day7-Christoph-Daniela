@@ -18,7 +18,7 @@ if ($_POST) {
     $picture = $_POST['picture'];
     ($picture == "product.png") ?: unlink("../../pictures/$picture");
 
-    $sql = "DELETE FROM cars WHERE id = {$id}";
+    $sql = "DELETE FROM cars WHERE car_id = {$id}";
     if (mysqli_query($connect, $sql) === TRUE) {
         $class = "success";
         $message = "Successfully Deleted!";

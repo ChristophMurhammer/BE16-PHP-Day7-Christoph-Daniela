@@ -21,8 +21,8 @@ if (mysqli_num_rows($result)  > 0) {
             <td><img class='img-thumbnail' src='../pictures/" . $row['picture'] . "'</td>
             <td>" . $row['brand'] . "</td>
             <td>" . $row['model'] . "</td>
-            <td><a href='update.php?id=" . $row['id'] . "'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
-            <a href='delete.php?id=" . $row['id'] . "'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
+            <td><a href='update.php?id=" . $row['car_id'] . "'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
+            <a href='delete.php?id=" . $row['car_id'] . "'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
             </tr>";
     };
 } else {
@@ -51,7 +51,7 @@ mysqli_close($connect);
         }
 
         td {
-            text-align: left;
+            text-align: center;
             vertical-align: middle;
         }
 
@@ -67,7 +67,7 @@ mysqli_close($connect);
             <a href="create.php"><button class='btn btn-primary' type="button">Add Car</button></a>
             <a href="../dashboard.php"><button class='btn btn-success' type="button">Dashboard</button></a>
         </div>
-        <p class='h2'>Products</p>
+        <p class='h2'>Cars</p>
         <table class='table table-striped'>
             <thead class='table-success'>
                 <tr>
